@@ -2,7 +2,7 @@ const request = require("request");
 const cheerio = require("cheerio");
 const fs=require("fs");
 
-request("https://sports.ndtv.com/cricket/srh-vs-mi-scorecard-live-cricket-score-ipl-2023-match-25-shmi04182023222197",cb);
+request("https://sports.ndtv.com/cricket/gt-vs-rr-scorecard-live-cricket-score-ipl-2023-match-23-ahmrr04162023222195",cb);
 
 let highestwickettaket={};
 
