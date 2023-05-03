@@ -168,6 +168,58 @@ function waitAndClick(selector) {
         });
     });
   }
+  
+  function pasteCode() {
+    return new Promise(function (resolve, reject) {
+      let problemTabClickPromise = tab.click('div[data-attr2="Problem"]');
+      problemTabClickPromise
+        .then(function () {
+          let waitAndClickPromise = waitAndClick(".checkbox-input");
+          return waitAndClickPromise;
+        })
+        .then(function () {
+          let waitForTextBoxPromise = tab.waitForSelector(".custominput");
+          return waitForTextBoxPromise;
+        })
+        .then(function () {
+          let codeTypePromise = tab.type(".custominput", gCode);
+          return codeTypePromise;
+        })
+        .then(function () {
+          let controlKeyDownPromise = tab.keyboard.down("Control");
+          return controlKeyDownPromise;
+        })
+        .then(function () {
+          let aKeyPressPromise = tab.keyboard.press("A");
+          return aKeyPressPromise;
+        })
+        .then(function () {
+          let xKeyPressPromise = tab.keyboard.press("X");
+          return xKeyPressPromise;
+        })
+        .then(function(){
+          let clickedOnCodeBoxPromise = tab.click('.monaco-editor.no-user-select.vs');
+          return clickedOnCodeBoxPromise;
+        })
+        .then(function(){
+          let aKeyPressPromise = tab.keyboard.press("A");
+          return aKeyPressPromise;
+        })
+        .then(function () {
+          let vKeyPressPromise = tab.keyboard.press("V");
+          return vKeyPressPromise;
+        })
+        .then(function () {
+          let controlKeyUpPromise = tab.keyboard.up("Control");
+          return controlKeyUpPromise;
+        }).then(function(){
+          resolve();
+        })
+        .catch(function(error){
+          reject(error);
+        })
+    });
+  }
 
   function solveQuestion(qLink) {
     return new Promise(function (resolve, reject) {
@@ -175,8 +227,6 @@ function waitAndClick(selector) {
         gotoPromise.then(function () {
             let waitAndClickPromise = waitAndClick('div[data-attr2="Editorial"]');
             return waitAndClickPromise;
-    }).then(function () {
-        console.log("on the solution page")
     })
     .then(function () {
         // this function will get code of c++ and set in gCode variable
@@ -184,7 +234,19 @@ function waitAndClick(selector) {
         return codePromise;
       })
       .then(function () {
-        console.log("got code");
+        // this function will get code of c++ and set in gCode variable
+        let pastePromise = pasteCode();
+        return pastePromise;
+      })
+      .then(function () {
+        let submitPromise = tab.click('.ui-btn.ui-btn-normal.ui-btn-primary.pull-right.hr-monaco-submit.ui-btn-styled');
+        return submitPromise;
+      })
+      .then(function(){
+        resolve();
+      })
+      .catch(function(error){
+        reject(error)
       })
 })
   }
