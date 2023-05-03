@@ -34,28 +34,28 @@ browseropenpromise.then(function(browser){
       ); //navigation => page change
       return loginPromise;
 })
+ .then(function () {
+    let waitAndClickPromise = tab.waitForSelector(".prep-kit-name:first-child");
+    return waitAndClickPromise; //Promise<Pending>
+   })
+ .then(function(){
+    let javachanlenge = tab.click(".prep-kit-name:first-child" ); 
+      return javachanlenge;
+ })  
 // .then(function () {
-//     let waitAndClickPromise = tab.waitForSelector("#base-card-1-link");
+//     let waitAndClickPromise = waitAndClick("prep-kit-name");
 //     return waitAndClickPromise; //Promise<Pending>
 //   })
-// .then(function(){
-//     let javachanlenge = tab.click("#base-card-1-link" ); 
-//       return javachanlenge;
-// })  
-.then(function () {
-    let waitAndClickPromise = waitAndClick("#base-card-1-link");
-    return waitAndClickPromise; //Promise<Pending>
-  })
 .then(function () {
     let waitPromise = tab.waitForSelector(
-      ".js-track-click.challenge-list-item",
+      ".ui-btn.ui-btn-normal.ui-btn-line-primary.interview-ch-li-cta.ui-btn-link.ui-btn-styled",
       { visible: true }
     );
     return waitPromise;
   })
   
   .then(function () {
-    let allQuesATagsPromise = tab.$$(".js-track-click.challenge-list-item");
+    let allQuesATagsPromise = tab.$$(".ui-btn.ui-btn-normal.ui-btn-line-primary.interview-ch-li-cta.ui-btn-link.ui-btn-styled.ui-btn.ui-btn-normal.ui-btn-line-primary.interview-ch-li-cta.ui-btn-link.ui-btn-styled");
     return allQuesATagsPromise;
   })
 .then(function(allQuesATags){
@@ -78,7 +78,7 @@ browseropenpromise.then(function(browser){
 .then(function ( allLinks) {
    
     let completeLinks = allLinks.map(function (link) {
-      //  console.log(link);
+        console.log(link);
         return "https://www.hackerrank.com" + link;
 
       });

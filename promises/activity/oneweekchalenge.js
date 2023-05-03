@@ -2,6 +2,8 @@ const puppeteer = require("puppeteer");
 const id ="wixali6168@in2reach.com";
 const password = "Mar@2020";
 let tab;
+let idx;
+let gCode;
 
 let browseropenpromise = puppeteer.launch({
     headless : false,
@@ -43,19 +45,19 @@ browseropenpromise.then(function(browser){
 //       return javachanlenge;
 // })  
 .then(function () {
-    let waitAndClickPromise = waitAndClick("#base-card-1-link");
+    let waitAndClickPromise = waitAndClick(".prep-kit-name:first-child");
     return waitAndClickPromise; //Promise<Pending>
   })
 .then(function () {
     let waitPromise = tab.waitForSelector(
-      ".js-track-click.challenge-list-item",
+      ".ui-btn.ui-btn-normal.ui-btn-line-primary.interview-ch-li-cta.ui-btn-link.ui-btn-styled",
       { visible: true }
     );
     return waitPromise;
   })
   
   .then(function () {
-    let allQuesATagsPromise = tab.$$(".js-track-click.challenge-list-item");
+    let allQuesATagsPromise = tab.$$(".ui-btn.ui-btn-normal.ui-btn-line-primary.interview-ch-li-cta.ui-btn-link.ui-btn-styled");
     return allQuesATagsPromise;
   })
 .then(function(allQuesATags){
@@ -116,6 +118,57 @@ function waitAndClick(selector) {
     });
   }
 
+  function getCode() {
+    return new Promise(function (resolve, reject) {
+      let waitPromise = tab.waitForSelector(".hackdown-content h3");
+      waitPromise
+        .then(function () {
+          let allCodeNamesElementsPromise = tab.$$(".hackdown-content h3");
+          return allCodeNamesElementsPromise;
+        })
+        .then(function (allCodeNameElements) {
+          // [ <h3>C++</h3> , <h3>Python</h3> , <h3>Java</h3>  ]
+          let allCodeNamesPromise = [];
+          for (let i = 0; i < allCodeNameElements.length; i++) {
+            let codeNamePromise = tab.evaluate(function (elem) {
+              return elem.textContent;
+            }, allCodeNameElements[i]);
+            allCodeNamesPromise.push(codeNamePromise);
+          }
+          // allCodeNamesPromise = [  Promise<Pending> , Promise<Pending> , Promise<Pending> ];
+          let sbkaPromise = Promise.all(allCodeNamesPromise);
+          return sbkaPromise; //Prmose<Pending> => Promise<["C++" , "Python" , "Java"]>
+        })
+        .then(function (codeNames) {
+          //["C++" , "Python" , "Java"];
+          for (let i = 0; i < codeNames.length; i++) {
+            if (codeNames[i] == "C++") {
+              idx = i;
+              break;
+            }
+          }
+          let allCodeDivPromise = tab.$$(".hackdown-content .highlight");
+          return allCodeDivPromise; // Promise<Pending>
+        })
+        .then(function (allCodeDivs) {
+          //[ <div></div> , <div></div> , <div></div> ];
+          let codeDiv = allCodeDivs[idx];
+          let codePromise = tab.evaluate(function (elem) {
+            return elem.textContent;
+          }, codeDiv);
+          return codePromise;
+        })
+        .then(function (code) {
+          //console.log(code);
+          gCode = code;
+          resolve();
+        })
+        .catch(function (error) {
+          reject(error);
+        });
+    });
+  }
+
   function solveQuestion(qLink) {
     return new Promise(function (resolve, reject) {
         let gotoPromise = tab.goto(qLink);
@@ -125,5 +178,13 @@ function waitAndClick(selector) {
     }).then(function () {
         console.log("on the solution page")
     })
+    .then(function () {
+        // this function will get code of c++ and set in gCode variable
+        let codePromise = getCode();
+        return codePromise;
+      })
+      .then(function () {
+        console.log("got code");
+      })
 })
   }
