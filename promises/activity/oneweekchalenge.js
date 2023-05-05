@@ -90,10 +90,17 @@ browseropenpromise.then(function(browser){
       });
       
       let oneQuesSolvePromise = solveQuestion(completeLinks[0]);
+
+      for(let i=2; i<completeLinks.length ; i++){
+        oneQuesSolvePromise = oneQuesSolvePromise.then( function(){
+          let nextQuesSolvePromise = solveQuestion(completeLinks[i]);
+          return nextQuesSolvePromise;
+        })
+      }
       return oneQuesSolvePromise;
 })
 .then(function () {
-    console.log("one Ques Solved Succesfully !!!!");
+    console.log(" Ques Solved Succesfully !!!!");
   })
 .catch(function(error){
     console.log(error);
@@ -219,6 +226,33 @@ function waitAndClick(selector) {
           reject(error);
         })
     });
+  }
+
+  function handleLockBtn(){
+    return new Promise( function(resolve , reject){
+      let waitPromise = tab.waitForSelector('.ui-btn.ui-btn-normal.ui-btn-primary.ui-btn-styled' , {visible:true , timeout:5000});
+      waitPromise.then(function(){
+        let lockBtnPromise = tab.$('.ui-btn.ui-btn-normal.ui-btn-primary.ui-btn-styled');
+        return lockBtnPromise;
+      })
+      .then(function(lockBtn){
+        // console.log(lockBtn);
+        let lockBtnClickPromise = lockBtn.click();
+        return lockBtnClickPromise;
+      })
+      .then(function(){
+        // clicked on lock btn
+        // lock btn found
+        console.log("lock btn found !!!");
+        resolve();
+      })
+      .catch(function(error){
+        // lock btn not found
+        console.log("lock btn not found !!!");
+        resolve();
+      })
+  
+    })
   }
 
   function solveQuestion(qLink) {
