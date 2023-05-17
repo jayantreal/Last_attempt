@@ -19,7 +19,7 @@ function addtodo(){
         deletebutton.innerHTML="Delete";
 
         deletebutton.addEventListener("click", function() {
-            listitem.remove();
+          event.target.parentNode.remove();
         });
 
         listitem.append(ptag);
