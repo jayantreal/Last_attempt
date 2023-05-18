@@ -2,7 +2,6 @@
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
-    font-family: 'Wix Madefor Text', sans-serif;
 }
 
 body {
@@ -45,9 +44,8 @@ body {
     padding: 10px;
 }
 
-
 .todo-item {
-    width: 80%;
+    width: 60%;
     margin: auto;
     margin-top: 40px;
     background-color: #8e44ad;
@@ -55,7 +53,6 @@ body {
     padding: 10px;
     text-align: center;
 }
-
 
 .todo {
     color: white;
