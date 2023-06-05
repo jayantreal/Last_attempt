@@ -6,7 +6,6 @@ function initCells(){
         cellsContent += `<div class='top-row-cell'>${String.fromCharCode(65+i)}</div>`
     }
     cellsContent += "</div>"
-
     cellsContent += "<div class='left-col'>"
     for(let i=0 ; i<100 ; i++){
         cellsContent += `<div class="left-col-cell">${i+1}</div>`
@@ -26,7 +25,7 @@ function initCells(){
 initCells();
 
 
-    let db;
+let db;
 
 function initDB(){
     db = [];
@@ -37,7 +36,8 @@ function initDB(){
             let name = String.fromCharCode(j+65)+(i+1)+"";
             let cellObject = {
                 name:name,
-                value:""
+                value:"",
+                formula:""
             }
             row.push(cellObject);
         }
