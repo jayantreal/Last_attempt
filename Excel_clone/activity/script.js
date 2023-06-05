@@ -26,4 +26,19 @@ for(let i=0;i<allCells.length;i++){
         
 
     })
+    allCells[i].addEventListener("blur" , function(e){
+        let cellValue = e.target.textContent;
+        let rowId = e.target.getAttribute("rowid");
+        let colId = e.target.getAttribute("colid");
+        let cellObject = db[rowId][colId];
+        console.log("before update " , cellObject);
+
+        if(cellObject.value == cellValue){
+            return;
+        }
+
+        // update the cellobject value if not same
+        cellObject.value = cellValue;
+        console.log("after update " , cellObject);
+    })
 }

@@ -24,3 +24,24 @@ function initCells(){
     cellsContentDiv.innerHTML = cellsContent;    
 }
 initCells();
+
+
+    let db;
+
+function initDB(){
+    db = [];
+    for(let i=0 ; i<100 ; i++){
+        let row = [];
+        for(let j=0 ; j<26 ; j++){
+            //i j
+            let name = String.fromCharCode(j+65)+(i+1)+"";
+            let cellObject = {
+                name:name,
+                value:""
+            }
+            row.push(cellObject);
+        }
+        db.push(row);
+    }
+}
+initDB();
