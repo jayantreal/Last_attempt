@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
+    top: 30px;
 }
 
 .menu{
@@ -32,6 +33,8 @@ height: calc( 100vh - 100px);
 background: greenyellow;
 
 overflow: auto;
+
+position: relative;
 }
 
 .sheets{
@@ -60,4 +63,80 @@ border: 1px solid;
 min-height: 30px;
 
 min-width: 70px;
+}  
+
+.top-left-cell{
+
+height: 30px;
+
+width: 30px;
+
+background: gray;
+
+position: absolute;
+
+z-index: 3;
+}
+
+.top-row{
+
+display: flex;
+
+position: absolute;
+
+background: lightblue;
+
+top: 0px;
+
+left: 30px;
+
+z-index: 2;
+}
+
+.top-row-cell{
+
+display: flex;
+
+border: 1px solid;
+
+min-height: 30px;
+
+min-width: 70px;
+
+justify-content: center;
+
+align-items: center;
+}
+
+.left-col{
+
+background: lightpink;
+
+width: 30px;
+top: 30px;
+position: absolute;
+
+z-index: 2;
+}
+.left-col-cell{
+    
+height: 30px;
+    
+width: 30px;
+    
+border: 1px solid;
+    
+display: flex;
+    
+justify-content: center;
+    
+align-items: center;
+}
+.cells{
+
+position: absolute;
+
+top: 30px;
+
+left: 30px;
 }
