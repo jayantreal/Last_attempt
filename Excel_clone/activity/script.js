@@ -31,7 +31,7 @@ for(let i=0;i<allCells.length;i++){
 
     })
     allCells[i].addEventListener("blur" , function(e){
-        lastselectedcell =e.target; 
+        lastSelectedCell =e.target; 
         let cellValue = e.target.textContent;
         let rowId = e.target.getAttribute("rowid");
         let colId = e.target.getAttribute("colid");
@@ -43,6 +43,9 @@ for(let i=0;i<allCells.length;i++){
 
         // update the cellobject value if not same
         cellObject.value = cellValue;
+
+        updateChildrens(cellObject);
+
     })
 }
 
@@ -51,12 +54,17 @@ formulaInput.addEventListener("blur" , function(e){
     if(formula){
         let {rowId , colId} = getRowIdColIdFromElement(lastSelectedCell);
         let cellObject = db[rowId][colId];
-        let computedValue = solveFormula(formula);
+       // let computedValue = solveFormula(formula);
+        let computedValue = solveFormula(formula , cellObject);
+
         // formula update
         cellObject.formula = formula;
         // cellObject value update
         cellObject.value = computedValue;
         // ui update
         lastSelectedCell.textContent = computedValue;
+
+        console.log(db);
+
     }
 })
