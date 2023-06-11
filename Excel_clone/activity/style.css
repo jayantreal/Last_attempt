@@ -14,6 +14,9 @@
 .address-content {
     border: 1px solid;
     height: 30px;
+    display: flex;
+    background: #ecf0f1;
+    align-items: center;
 }
 .cells-content {
     height: calc( 100vh - 150px);
@@ -24,6 +27,9 @@
 .sheets {
     border: 1px solid;
     height: 30px;
+    display: flex;
+    background: #ecf0f1;
+    align-items: center;
 }
 .row {
     display: flex;
@@ -78,4 +84,39 @@
     position: absolute;
     top: 30px;
     left: 30px;
+}
+.add-sheet {
+    width: 30px;
+    /* background: aqua; */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid lightgray;
+}
+
+.add-sheet .fas {
+    color: #2ecc71;
+}
+
+.sheets-list {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.sheet {
+    border-right: 1px solid lightgray;
+    width: 70px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.active-sheet {
+    background: white;
+    font-weight: bold;
 }
