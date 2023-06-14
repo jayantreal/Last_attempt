@@ -92,6 +92,8 @@ formulaInput.addEventListener("blur" , function(e){
 
        // console.log(db);
        updateChildrens(cellObject); 
+       
+       console.log(sheetsDB);
 
     }
 })

@@ -25,11 +25,12 @@ function initCells(){
 }
 initCells();
 
+let sheetsDB = [];
 
 let db;
 
 function initDB(){
-    db = [];
+    let newSheetDB = [];
     for(let i=0 ; i<100 ; i++){
         let row = [];
         for(let j=0 ; j<26 ; j++){
@@ -44,7 +45,9 @@ function initDB(){
             }
             row.push(cellObject);
         }
-        db.push(row);
+        newSheetDB.push(row);
     }
+    sheetsDB.push(newSheetDB);
+    db = newSheetDB;
 }
 initDB();
