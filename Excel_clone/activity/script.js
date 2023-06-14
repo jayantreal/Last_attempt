@@ -52,6 +52,11 @@ for(let i=0;i<allCells.length;i++){
         cellObject.value = cellValue;
 
         updateChildrens(cellObject);
+        if(cellObject.visited){
+            return;
+        }
+        cellObject.visited = true;
+        visitedCells.push({rowId:rowId , colId:colId})
 
     })
 
@@ -93,7 +98,12 @@ formulaInput.addEventListener("blur" , function(e){
        // console.log(db);
        updateChildrens(cellObject); 
        
-       console.log(sheetsDB);
+       if(cellObject.visited){
+        return;
+    }
+    cellObject.visited = true;
+    visitedCells.push({rowId:rowId , colId:colId})
+    console.log(sheetsDB);
 
     }
 })
