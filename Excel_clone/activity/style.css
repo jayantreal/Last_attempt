@@ -184,7 +184,7 @@
 .font-style {
     display: flex;
     width: 150px;
-    height: 100%;
+    height: 60%;
     justify-content: space-around;
     align-items: center;
     border-right: 1px solid lightgray;
@@ -216,6 +216,33 @@
     width: 50px;
     border: none;
     text-align: center;
+}
+.font-alignments {
+}
+
+.font-alignments div {
+}
+
+.font-alignments .fas {
+}
+
+.font-size {
+    width: 200px;
+}
+
+.font-size select {
+    background: var(--cell-background);
+    outline: none;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.font-type {
+    width: 110px;
+}
+
+.font-text-size {
+    width: 55px;
 }
 
 #formula {
