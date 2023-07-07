@@ -107,6 +107,12 @@ cellsContentDiv.addEventListener("scroll", function (e) {
 
     }
 });
+
+allCells[i].addEventListener("keyup" , function(e){
+  let cellValue = allCells[i].textContent;
+  // console.log(cellValue)
+  socket.emit("cellValue" , cellValue);
+})
 }
 
 // when someone leaves the formula input !!

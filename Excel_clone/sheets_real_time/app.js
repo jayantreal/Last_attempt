@@ -32,8 +32,7 @@ io.on("connection" , function(socket){
 
         socket.broadcast.emit("setRealtimeCell" , {username , ...cellCordinates  })
     })
-
-
+   
 })
 
 
